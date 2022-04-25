@@ -1,3 +1,4 @@
+package ua.kharkov.kpi.jmt.servlet;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -8,7 +9,13 @@ import java.io.IOException;
 public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        StringBuilder outputBuilder = new StringBuilder();
 
+        outputBuilder.append("<h2>Welcome</h2>");
+        outputBuilder.append("<p>This is my servlet</p>");
+
+        response.setContentType("text/html;charset=UTF-8");
+        response.getWriter().print(outputBuilder);
     }
 
     @Override

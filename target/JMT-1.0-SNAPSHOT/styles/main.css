@@ -1,0 +1,26 @@
+body {
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+}
+
+#content {
+    position: absolute;
+    left: 49%;
+    top: 49%;
+    transform: translate(-50%, -50%);
+    border: 5px solid rgb(255, 255, 0);
+    border-radius: 15px;
+    background: rgba(255, 255, 0, 0.5);
+    padding: 10px;
+
+    text-align: -webkit-center;
+}
+#content > ul {
+    list-style: none;
+}
+
+
+a, a:visited, a:hover {
+    text-decoration: none;
+    color: #4eb8c8;
+}
