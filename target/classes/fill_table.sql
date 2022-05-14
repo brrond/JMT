@@ -1,1 +1,0 @@
-INSERT INTO account(email, username, password, date_of_registration) VALUES('mySuperEmail.gmail.com', '_someUSER228_', 'someuser', NOW());
