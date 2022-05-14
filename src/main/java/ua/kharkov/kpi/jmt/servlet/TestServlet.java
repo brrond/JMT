@@ -1,5 +1,7 @@
 package ua.kharkov.kpi.jmt.servlet;
 
+import ua.kharkov.kpi.jmt.XMathApiClient;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -9,6 +11,8 @@ import java.io.IOException;
 public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(XMathApiClient.getRandomExpression());
+
         StringBuilder outputBuilder = new StringBuilder();
 
         outputBuilder.append("<h2>Welcome</h2>");
