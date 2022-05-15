@@ -5,5 +5,7 @@
              version="2.2">
     <persistence-unit transaction-type="JTA" name="jmt-persistence-unit">
         <jta-data-source>jdbc:postgresql://localhost:5432/JMT</jta-data-source>
+        <!-- Список всех классов сущностей проекта -->
+        <class>ua.kharkov.kpi.jmt.model.User</class>
     </persistence-unit>
 </persistence>

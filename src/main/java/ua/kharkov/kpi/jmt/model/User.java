@@ -1,13 +1,15 @@
 package ua.kharkov.kpi.jmt.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity(name="account")
 public class User {
     @Id
@@ -28,6 +30,6 @@ public class User {
     private Date dateOfRegistration;
 
     @Column(name="photo")
-    private String photoPath;
+    private String photoPath = null;
 
 }
