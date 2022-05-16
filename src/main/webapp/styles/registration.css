@@ -1,0 +1,29 @@
+#emailHelp, #passHelp, #photoHelp {
+    position: absolute;
+    background-color: white;
+    border-radius: 20px;
+    color: #4eb8c8;
+    padding: 10px;
+
+    display: none;
+}
+
+#emailHelp {
+    width: 200px;
+    top: 26%;
+    left: 102%;
+}
+
+#passHelp {
+    width: 400px;
+    padding: 10px;
+    top: 40%;
+    left: -106%;
+}
+
+#photoHelp {
+    width: 400px;
+    padding: 10px;
+    top: 56%;
+    left: 102%;
+}
