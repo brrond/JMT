@@ -8,7 +8,6 @@ import java.sql.Date;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @Entity(name="account")
 public class User {
@@ -32,4 +31,11 @@ public class User {
     @Column(name="photo")
     private String photoPath = null;
 
+    public User(String email, String username, String password, Date dateOfRegistration, String photoPath) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.dateOfRegistration = dateOfRegistration;
+        this.photoPath = photoPath;
+    }
 }

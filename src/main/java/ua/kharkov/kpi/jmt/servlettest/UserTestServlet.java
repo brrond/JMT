@@ -1,4 +1,4 @@
-package ua.kharkov.kpi.jmt.servlet;
+package ua.kharkov.kpi.jmt.servlettest;
 
 import ua.kharkov.kpi.jmt.XMathApiClient;
 import ua.kharkov.kpi.jmt.model.User;
@@ -36,7 +36,7 @@ public class UserTestServlet extends HttpServlet {
         user.setEmail("myMiLo.gmail");
         user.setUsername("__Coyote__");
         user.setPassword("MyMyMyPass");
-        user.setDateOfRegistration(new Date(2022, 5, 15));
+        user.setDateOfRegistration(new Date(System.currentTimeMillis()));
         //INSERT INTO public.account
         // (user_id, email, username, password, date_of_registration, photo)
         // VALUES (DEFAULT, 'bebra@gmai.com', 'fkejwkfjw', '1234203', '2022-05-15', null)
