@@ -23,7 +23,14 @@ public class RegistrationFilter extends HttpFilter {
         req.setCharacterEncoding("UTF-8");
 
         HttpSession session = req.getSession(true); // obtain session
-        if(session.getAttribute("user") == null && req.getParameter("email") != null) { // if it's new user
+
+        if(session.getAttribute("user") != null) {
+            req.getRequestDispatcher("personal_page").forward(req, res);
+            return;
+        }
+
+        if(req.getParameter("email") != null) { // if it's new user
+            session.setMaxInactiveInterval(7 * 24 * 60 * 60);
             String username = req.getParameter("username");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
@@ -35,14 +42,25 @@ public class RegistrationFilter extends HttpFilter {
             Date registrationDate = new Date(System.currentTimeMillis());
             String filePath = Math.abs(photoPart.getSubmittedFileName().hashCode() * registrationDate.hashCode() * System.currentTimeMillis()) + ".png";
 
-            photoPart.write("C:\\Users\\danya\\source\\DelMePls\\" + filePath); // save img
+            // TODO somehow it's possible to obtain basePath
+            // TODO
 
-            User user = new User(email, username, password, registrationDate, filePath);
-            userDAO.save(user);
-        } else { // if we already have some user
+            User user;
+            if(!filePath.equals("0.png")) {
+                //System.out.println(basePath);
+                //photoPart.write(basePath + "images\\" + filePath); // save img
+                user = new User(email, username, password, registrationDate, filePath);
+                user = new User(email, username, password, registrationDate, null); // TODO Remove this later
+            } else {
+                user = new User(email, username, password, registrationDate, null);
+            }
+            userDAO.save(user); // save new user in db
+            session.setAttribute("user", user);
+        } else { // if we don't have user input
             res.sendRedirect("registration.html");
             return;
         }
+
         chain.doFilter(req, res);
     }
 }
