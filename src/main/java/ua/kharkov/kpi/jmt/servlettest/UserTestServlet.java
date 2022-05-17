@@ -1,11 +1,10 @@
 package ua.kharkov.kpi.jmt.servlettest;
 
-import ua.kharkov.kpi.jmt.XMathApiClient;
+import ua.kharkov.kpi.jmt.xmath.XMathApiClient;
 import ua.kharkov.kpi.jmt.model.User;
 import ua.kharkov.kpi.jmt.repository.UserDAO;
 
 import javax.inject.Inject;
-import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;

@@ -1,7 +1,8 @@
 package ua.kharkov.kpi.jmt;
 
 import org.junit.jupiter.api.Test;
-import ua.kharkov.kpi.jmt.model.Expression;
+import ua.kharkov.kpi.jmt.xmath.Expression;
+import ua.kharkov.kpi.jmt.xmath.XMathApiClient;
 
 import static org.junit.jupiter.api.Assertions.*;
 

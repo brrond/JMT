@@ -1,6 +1,4 @@
-package ua.kharkov.kpi.jmt;
-
-import ua.kharkov.kpi.jmt.model.Expression;
+package ua.kharkov.kpi.jmt.xmath;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -21,16 +19,6 @@ public final class XMathApiClient {
     private static final String DIV = BASE_API_URL + "div/";
     private static final String RANDOM = BASE_API_URL + "random/";
 
-    public static Expression getExpression(JsonObject jsonObject) {
-        Expression expression = new Expression();
-        expression.setFirst(jsonObject.getInt("first"));
-        expression.setSecond(jsonObject.getInt("second"));
-        expression.setOperation(jsonObject.getString("operation"));
-        expression.setAnswer(jsonObject.getInt("answer"));
-        expression.setExpression(jsonObject.getString("expression"));
-        return expression;
-    }
-
     public static Expression getRandomExpression() {
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(RANDOM);
@@ -40,7 +28,7 @@ public final class XMathApiClient {
         String body = response.readEntity(String.class);
 
         JsonReader jsonReader = Json.createReader(new StringReader(body));
-        return getExpression(jsonReader.readObject());
+        return ExpressionFactory.getExpression(jsonReader.readObject());
     }
 
     public static JsonObject constructQuery(Character operation,
@@ -68,7 +56,4 @@ public final class XMathApiClient {
         return jsonReader.readObject();
     }
 
-    public static JsonObject constructQuery(Character operation) {
-        return constructQuery(operation, -20, 20, -20, 20);
-    }
 }

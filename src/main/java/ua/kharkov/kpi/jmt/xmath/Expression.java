@@ -1,4 +1,4 @@
-package ua.kharkov.kpi.jmt.model;
+package ua.kharkov.kpi.jmt.xmath;
 
 import lombok.*;
 
