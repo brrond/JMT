@@ -39,9 +39,12 @@ public class PersonalPageServlet extends HttpServlet {
         outputBuilder.append(HTMLPage.getBody1());
 
         outputBuilder.append("<h1>").append(user.getUsername()).append("'s personal page</h1><br>");
-        outputBuilder.append("<img alt=\"NoImg\" src=\"")
-                .append("images\\")
-                .append(user.getPhotoPath()).append("\"><br><br>");
+        /*outputBuilder.append("<img alt=\"NoImg\" src=\"")
+                .append(getServletContext().getInitParameter("upload.location"))
+                .append(user.getPhotoPath()).append("\"><br><br>");*/
+        outputBuilder.append("<img width='200px' alt=\"NoImg\" src=\"")
+                .append("UserPhotoServlet")
+                .append("\"><br><br>");
 
         outputBuilder.append("<a href='logout.jsp'>Logout</a>");
 

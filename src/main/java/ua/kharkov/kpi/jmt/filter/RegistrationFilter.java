@@ -42,19 +42,14 @@ public class RegistrationFilter extends HttpFilter {
             Date registrationDate = new Date(System.currentTimeMillis());
             String filePath = Math.abs(photoPart.getSubmittedFileName().hashCode() * registrationDate.hashCode() * System.currentTimeMillis()) + ".png";
 
-            // TODO somehow it's possible to obtain basePath
-            // TODO
+            String basePath = getServletContext().getInitParameter("upload.location");
 
             User user;
-            if(!filePath.equals("0.png")) {
-                //System.out.println(basePath);
-                //photoPart.write(basePath + "images\\" + filePath); // save img
-                user = new User(email, username, password, registrationDate, filePath);
-                user = new User(email, username, password, registrationDate, null); // TODO Remove this later
-            } else {
-                user = new User(email, username, password, registrationDate, null);
-            }
+            user = new User(email, username, password, registrationDate, null);
+            if(!filePath.equals("0.png")) user.setPhotoPath(filePath);
             userDAO.save(user); // save new user in db
+            if(!filePath.equals("0.png")) photoPart.write(basePath + filePath); // save img
+
             session.setAttribute("user", user);
         } else { // if we don't have user input
             res.sendRedirect("registration.html");
