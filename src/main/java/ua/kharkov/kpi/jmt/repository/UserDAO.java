@@ -18,10 +18,14 @@ public class UserDAO {
     /**
      * Method to persist user<br>
      * This method allows saving new user or saving edited user
-     * @param user <b>User</b> to save
+     * @param user <b>User</b> to persist
      */
-    public void save(User user) {
+    public void persist(User user) {
         manager.persist(user);
+    }
+
+    public void merge(User user) {
+        manager.merge(user);
     }
 
     /**

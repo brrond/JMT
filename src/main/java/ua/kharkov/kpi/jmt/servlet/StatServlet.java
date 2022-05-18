@@ -48,6 +48,7 @@ public class StatServlet extends HttpServlet {
                     .append("<td>Date</td>")
                     .append("<td>Time</td>")
                     .append("<td>Speed</td>")
+                    .append("<td>Experience</td>")
                     .append("</tr>");
 
             for (Session ses : sessions) {
@@ -55,6 +56,7 @@ public class StatServlet extends HttpServlet {
                         .append("<td>").append(ses.getDate()).append("</td>")
                         .append("<td>").append(ses.getTime()).append("</td>")
                         .append("<td>").append(ses.getSpeed()).append("</td>")
+                        .append("<td>").append(ses.getExp()).append("</td>")
                         .append("</tr>");
             }
             outputBuilder.append("</table><br>");

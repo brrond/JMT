@@ -37,6 +37,9 @@ public class PersonalPageServlet extends HttpServlet {
         outputBuilder.append("<img width='200px' alt=\"NoImg\" src=\"")
                 .append("UserPhotoServlet")
                 .append("\"><br><br>");
+        outputBuilder.append("<p>Your current experience : ").append(user.getExp()).append("</p><br>");
+        outputBuilder.append("<p>Your level : ").append(user.getLevel()).append("</p><br>");
+        outputBuilder.append("<p>You need : ").append(user.getExperienceToNextLevel()).append("exp to next level</p><br><br>");
 
         outputBuilder.append("<a href='./play.jsp'>Play game</a><br>");
         outputBuilder.append("<a href='stat'>Stat page</a><br>");

@@ -19,7 +19,6 @@ public class SessionDAO {
     }
 
     public void remove(Session session) {
-        session = findSession(session);
         em.remove(session);
     }
 

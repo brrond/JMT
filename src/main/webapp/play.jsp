@@ -1,5 +1,6 @@
 <%@ page import="ua.kharkov.kpi.jmt.xmath.Expression" %>
 <%@ page import="ua.kharkov.kpi.jmt.xmath.ExpressionFactory" %>
+<%@ page import="ua.kharkov.kpi.jmt.model.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: danya
@@ -44,6 +45,7 @@
 <div id="content">
     <%
         Expression[] expressions = ExpressionFactory.getSimpleExpressions();
+        User user = (User) session.getAttribute("user");
     %>
 
     <% for (Expression expression : expressions) { %>
@@ -63,6 +65,18 @@
     <script src="scripts/play.js"></script>
     <script>
         let answers = [<%for(Expression expression: expressions) out.print(expression.getAnswer() + ", ");%>];
+        let experience = [<%
+        for(Expression expression: expressions) {
+            switch (expression.getOperation()) {
+                case "/": out.print(1); break;
+                case "*": out.print(0.75); break;
+                case "-": out.print(0.5); break;
+                default : out.print(0.25); break;
+            }
+            out.print(", ");
+        };%>];
+        let experienceToNextLevel = <%out.print(user.getExperienceToNextLevel());%>;
+        let userAnswers = []
         let btnStart = document.getElementById("btnStart");
 
         btnStart.addEventListener("click", () => {

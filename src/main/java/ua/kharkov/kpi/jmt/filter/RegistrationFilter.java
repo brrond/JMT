@@ -7,10 +7,8 @@ import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
-import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.Calendar;
 
 @WebFilter(filterName = "RegistrationFilter", servletNames = "RegistrationServlet")
 public class RegistrationFilter extends HttpFilter {
@@ -45,10 +43,10 @@ public class RegistrationFilter extends HttpFilter {
             String basePath = getServletContext().getInitParameter("upload.location");
 
             User user;
-            user = new User(email, username, password, registrationDate, null);
+            user = new User(email, username, password, registrationDate, null, 0.);
             if(!filePath.equals("0.png")) user.setPhotoPath(filePath);
-            userDAO.save(user); // save new user in db
-            if(!filePath.equals("0.png")) photoPart.write(basePath + filePath); // save img
+            userDAO.persist(user); // persist new user in db
+            if(!filePath.equals("0.png")) photoPart.write(basePath + filePath); // persist img
 
             session.setAttribute("user", user);
         } else { // if we don't have user input

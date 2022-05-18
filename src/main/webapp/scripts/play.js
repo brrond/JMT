@@ -1,3 +1,5 @@
+
+
 function initCurr() {
     divs[currDiv].style.display = "block";
     inp = divs[currDiv].getElementsByTagName("input")[0];
@@ -18,9 +20,8 @@ function nextDiv() {
 function onChange() {
     let userInp = parseInt(this.value);
     //console.log(userInp);
-    if(userInp === answers[currDiv]) {
-        nextDiv();
-    }
+    userAnswers.push(userInp === answers[currDiv]);
+    nextDiv();
 }
 
 function start() {
@@ -32,7 +33,26 @@ function start() {
 function end() {
     sw.stop();
     let elapsed = sw.getElapsed() / 1000;
-    divRes.innerHTML = "Test successful. Elapsed time : " + elapsed + "sec<br>" + "<a href='save_session?&time=" + elapsed + "'>Done</a>";
+
+    // show all divs
+    let exp = 0.0;
+    for (let i = 0; i < divs.length; i++) {
+        let div = divs[i];
+        let inp = div.getElementsByTagName("input")[0];
+        div.style.display = 'block';
+        inp.removeEventListener("change", onChange);
+        if(!userAnswers[i]) {
+            inp.setCustomValidity("False");
+        } else {
+            exp += experience[i];
+        }
+    }
+
+    divRes.innerHTML = "<br>Elapsed time : " + elapsed + "sec<br>";
+    if(exp >= experienceToNextLevel) {
+        divRes.innerHTML += "<p>New level!</p>";
+    }
+    divRes.innerHTML += "<a href='save_session?time=" + elapsed + "&exp=" + exp + "'>Done</a>";
     divRes.style.display = "block";
 }
 

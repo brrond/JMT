@@ -40,7 +40,7 @@ public class UserTestServlet extends HttpServlet {
         // (user_id, email, username, password, date_of_registration, photo)
         // VALUES (DEFAULT, 'bebra@gmai.com', 'fkejwkfjw', '1234203', '2022-05-15', null)
 
-        userDAO.save(user); // save new user
+        userDAO.persist(user); // persist new user
         outputBuilder.append("<p>User : ").append(user).append(" added</p>");
         outputBuilder.append("<p>Total user count right now : ")
                 .append(userCount)

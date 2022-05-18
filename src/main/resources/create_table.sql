@@ -19,3 +19,5 @@ CREATE TABLE session (
 );
 
 ALTER TABLE session ADD COLUMN speed FLOAT;
+ALTER TABLE session ADD COLUMN experience FLOAT;
+ALTER TABLE account ADD COLUMN experience FLOAT DEFAULT(1);
