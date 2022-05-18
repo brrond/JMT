@@ -56,6 +56,9 @@ public class RegistrationFilter extends HttpFilter {
 
             User user;
             user = new User(email, username, password, registrationDate, null, 0.);
+            if(userDAO == null) {
+                throw new NumberFormatException("Bebra");
+            }
             if(!filePath.equals("0.png")) user.setPhotoPath(filePath);
             userDAO.persist(user); // persist new user in db
             if(!filePath.equals("0.png")) photoPart.write(basePath + filePath); // persist img

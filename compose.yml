@@ -1,0 +1,42 @@
+version: "3.9"
+
+volumes:
+  docker:
+  pgadmin:
+
+services:
+  jmt-db:
+    image: postgres
+    container_name: jmt-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - docker:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=pass
+
+  jmt-admin4:
+    # host name: host.docker.internal
+    image: dpage/pgadmin4
+    container_name: jmt-pgadmin
+    ports:
+      - "80:80"
+    volumes:
+      - pgadmin:/var/lib/pgadmin4
+      - pgadmin:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=a@a.com
+      - PGADMIN_DEFAULT_PASSWORD=pass
+
+  jmt-server:
+    image: tomee:11-jre-8.0.9-webprofile
+    container_name: jmt-tomee-server
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./target:/usr/local/tomee/webapps/
+    entrypoint:
+      - catalina.sh
+      - run
+    links:
+      - jmt-db

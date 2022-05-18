@@ -5,7 +5,7 @@
          version="4.0">
     <context-param>
         <param-name>upload.location</param-name>
-        <param-value>C:/Users/danya/Desktop/6 семестр/JMT/src/main/webapp/images/</param-value>
+        <param-value>/usr/local/tomee/webapps/JMT-1.0-SNAPSHOT/images/</param-value>
         <!-- TODO Change this path if project migrates -->
     </context-param>
 </web-app>
