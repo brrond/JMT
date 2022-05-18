@@ -14,12 +14,7 @@ import java.io.PrintWriter;
 public class PersonalPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        if(user != null) {
-            doPost(request, response);
-        }
-        response.sendRedirect("personal_page");
+        doPost(request, response);
     }
 
     @Override
@@ -39,14 +34,12 @@ public class PersonalPageServlet extends HttpServlet {
         outputBuilder.append(HTMLPage.getBody1());
 
         outputBuilder.append("<h1>").append(user.getUsername()).append("'s personal page</h1><br>");
-        /*outputBuilder.append("<img alt=\"NoImg\" src=\"")
-                .append(getServletContext().getInitParameter("upload.location"))
-                .append(user.getPhotoPath()).append("\"><br><br>");*/
         outputBuilder.append("<img width='200px' alt=\"NoImg\" src=\"")
                 .append("UserPhotoServlet")
                 .append("\"><br><br>");
 
-        outputBuilder.append("<a href='logout.jsp'>Logout</a>");
+        outputBuilder.append("<a href='./play.jsp'>Play game</a><br>");
+        outputBuilder.append("<a href='./logout.jsp'>Logout</a>");
 
         outputBuilder.append(HTMLPage.getBody2());
         response.setContentType("text/html;charset=utf-8");

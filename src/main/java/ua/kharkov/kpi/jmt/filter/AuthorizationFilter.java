@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebFilter(filterName = "AuthorizationFilter", servletNames = "PersonalPageServlet")
+@WebFilter(filterName = "AuthorizationFilter", servletNames = {"PersonalPageServlet"}, urlPatterns = {"/play.jsp"})
 public class AuthorizationFilter extends HttpFilter {
 
     @Inject
@@ -25,25 +25,22 @@ public class AuthorizationFilter extends HttpFilter {
 
         HttpSession session = req.getSession(true); // obtain session
 
-        if(session.getAttribute("user") != null) {
-            req.getRequestDispatcher("personal_page").forward(req, res);
-            return;
-        }
+        if(session.getAttribute("user") == null) {
+            session.setMaxInactiveInterval(7 * 24 * 60 * 60);
+            if (req.getParameter("email") != null) { // if it's new session or user didn't input info
+                String email = req.getParameter("email");
+                String pass = req.getParameter("password");
+                User user = userDAO.findUserByEmail(email);
+                if (!Objects.equals(user.getPassword(), pass)) {
+                    // TODO Send error
+                    return;
+                }
 
-        session.setMaxInactiveInterval(7 * 24 * 60 * 60);
-        if(req.getParameter("email") != null) { // if it's new session or user didn't input info
-            String email = req.getParameter("email");
-            String pass = req.getParameter("password");
-            User user = userDAO.findUserByEmail(email);
-            if(!Objects.equals(user.getPassword(), pass)) {
-                // TODO Send error
+                session.setAttribute("user", user);
+            } else {
+                req.getRequestDispatcher("authorization.html").forward(req, res);
                 return;
             }
-
-            session.setAttribute("user", user);
-        } else {
-            req.getRequestDispatcher("authorization.html").forward(req, res);
-            return;
         }
 
         chain.doFilter(req, res);
