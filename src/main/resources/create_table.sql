@@ -1,5 +1,4 @@
 DROP TABLE session;
-DROP TABLE stat;
 DROP TABLE account;
 
 CREATE TABLE account (
@@ -11,30 +10,12 @@ CREATE TABLE account (
 	photo VARCHAR(255)
 );
 
-CREATE TABLE stat (
-	stat_id INT NOT NULL, 
-	right_plus INT DEFAULT(0),
-	right_minus INT DEFAULT(0),
-	right_mul INT DEFAULT(0),
-	right_div INT DEFAULT(0),
-	wrong_plus INT DEFAULT(0),
-	wrong_minus INT DEFAULT(0),
-	wrong_mul INT DEFAULT(0),
-	wrong_div INT DEFAULT(0),
-	FOREIGN KEY(stat_id) REFERENCES account (user_id)
-);
-
 CREATE TABLE session (
 	session_id SERIAL PRIMARY KEY,
 	user_id INT,
-	date_time TIMESTAMP NOT NULL,
-	right_plus INT DEFAULT(0),
-	right_minus INT DEFAULT(0),
-	right_mul INT DEFAULT(0),
-	right_div INT DEFAULT(0),
-	wrong_plus INT DEFAULT(0),
-	wrong_minus INT DEFAULT(0),
-	wrong_mul INT DEFAULT(0),
-	wrong_div INT DEFAULT(0),
+	date DATE NOT NULL,
+	time TIME NOT NULL,
 	FOREIGN KEY(user_id) REFERENCES account (user_id)
 );
+
+ALTER TABLE session ADD COLUMN speed FLOAT;
