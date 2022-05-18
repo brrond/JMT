@@ -18,8 +18,6 @@ public class UserTestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println(XMathApiClient.getRandomExpression());
-
         StringBuilder outputBuilder = new StringBuilder();
 
         outputBuilder.append("<h2>Welcome to UserTestServlet</h2>");

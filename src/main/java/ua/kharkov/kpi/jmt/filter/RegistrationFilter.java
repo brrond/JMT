@@ -32,10 +32,22 @@ public class RegistrationFilter extends HttpFilter {
             String username = req.getParameter("username");
             String email = req.getParameter("email");
             String password = req.getParameter("password");
-            // TODO Check email & password
+
+            String msg = "";
+            if(!email.matches("[A-Za-z_]+[0-9A-Za-z_]*@[a-zA-Z_]+[a-zA-Z0-9_]*\\.[a-zA-Z]+")) msg = "Email is wrong";
+
+            if(!username.matches("[A-Za-z_0-9]{4,32}")) msg = "Username is wrong";
+
+            if(!password.matches("[A-Za-z0-9!@#$%^&*()_+-=]{8,32}")) msg = "Password is too incorrect";
 
             Part photoPart = req.getPart("photo");
-            // TODO Check photo cfg
+            if(photoPart.getSize() > 1024 * 1024) msg = "File is too large";
+
+            if(!msg.isEmpty()) {
+                req.setAttribute("redirect", "personal_page");
+                req.getRequestDispatcher("./massage.jsp").forward(req, res);
+                return;
+            }
 
             Date registrationDate = new Date(System.currentTimeMillis());
             String filePath = Math.abs(photoPart.getSubmittedFileName().hashCode() * registrationDate.hashCode() * System.currentTimeMillis()) + ".png";

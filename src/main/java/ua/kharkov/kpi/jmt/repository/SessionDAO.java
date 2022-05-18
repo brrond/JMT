@@ -4,6 +4,7 @@ import ua.kharkov.kpi.jmt.model.Session;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.sql.Date;
 import java.util.List;
@@ -23,23 +24,39 @@ public class SessionDAO {
     }
 
     public Session findSession(Session session) {
+        try {
         return em.find(Session.class, session.getSessionId());
+        } catch(NoResultException e) {
+            return null;
+        }
     }
 
     public Session findSessionById(Long sessionId) {
-        return em.find(Session.class, sessionId);
+        try {
+            return em.find(Session.class, sessionId);
+        } catch(NoResultException e) {
+        return null;
+    }
     }
 
     public List<Session> findSessionsByUserId(Long userId) {
+        try {
         return em.createQuery("SELECT ses FROM session ses WHERE ses.userId=:userId", Session.class)
                 .setParameter("userId", userId)
                 .getResultList();
+        } catch(NoResultException e) {
+            return null;
+        }
     }
 
     public List<Session> findSessionsByDate(Date date) {
-        return em.createQuery("SELECT ses FROM session ses WHERE ses.date=:date", Session.class)
-                .setParameter("date", date)
-                .getResultList();
+        try {
+            return em.createQuery("SELECT ses FROM session ses WHERE ses.date=:date", Session.class)
+                    .setParameter("date", date)
+                    .getResultList();
+        } catch(NoResultException e) {
+        return null;
+    }
     }
 
 }

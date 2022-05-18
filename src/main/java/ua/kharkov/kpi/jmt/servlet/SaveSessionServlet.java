@@ -33,7 +33,6 @@ public class SaveSessionServlet extends HttpServlet {
         String time = request.getParameter("time");
         String expS = request.getParameter("exp");
         Double exp = Double.valueOf(expS);
-        System.out.println(exp);
 
         Session session2Save = new Session();
         session2Save.setDate(new Date(System.currentTimeMillis()));

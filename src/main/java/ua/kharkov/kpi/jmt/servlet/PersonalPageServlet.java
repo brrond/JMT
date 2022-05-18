@@ -34,7 +34,7 @@ public class PersonalPageServlet extends HttpServlet {
         outputBuilder.append(HTMLPage.getBody1());
 
         outputBuilder.append("<h1>").append(user.getUsername()).append("'s personal page</h1><br>");
-        outputBuilder.append("<img width='200px' alt=\"NoImg\" src=\"")
+        outputBuilder.append("<img width='200px' height='200px' alt=\"NoImg\" src=\"")
                 .append("UserPhotoServlet")
                 .append("\"><br><br>");
         outputBuilder.append("<p>Your current experience : ").append(user.getExp()).append("</p><br>");

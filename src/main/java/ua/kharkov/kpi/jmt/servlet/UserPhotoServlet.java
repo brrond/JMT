@@ -23,7 +23,6 @@ public class UserPhotoServlet extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        // TODO Check if User
         response.setContentType("image/jpeg");
 
         ServletOutputStream outStream = response.getOutputStream();

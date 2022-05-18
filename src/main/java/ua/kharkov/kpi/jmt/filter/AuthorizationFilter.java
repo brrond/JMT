@@ -31,14 +31,16 @@ public class AuthorizationFilter extends HttpFilter {
                 String email = req.getParameter("email");
                 String pass = req.getParameter("password");
                 User user = userDAO.findUserByEmail(email);
-                if (!Objects.equals(user.getPassword(), pass)) {
-                    // TODO Send error
+                if (user == null || !Objects.equals(user.getPassword(), pass)) {
+                    req.setAttribute("msg", "User not found");
+                    req.setAttribute("redirect", "personal_page");
+                    req.getRequestDispatcher("./massage.jsp").forward(req, res);
                     return;
                 }
 
                 session.setAttribute("user", user);
             } else {
-                req.getRequestDispatcher("authorization.html").forward(req, res);
+                res.sendRedirect("./authorization.html");
                 return;
             }
         }
