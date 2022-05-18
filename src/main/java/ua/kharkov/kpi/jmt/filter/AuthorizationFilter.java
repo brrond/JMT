@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
-@WebFilter(filterName = "AuthorizationFilter", servletNames = {"PersonalPageServlet"}, urlPatterns = {"/play.jsp"})
+@WebFilter(filterName = "AuthorizationFilter", servletNames = {"PersonalPageServlet", "StatServlet"}, urlPatterns = {"/play.jsp"})
 public class AuthorizationFilter extends HttpFilter {
 
     @Inject

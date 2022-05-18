@@ -39,6 +39,6 @@ public class SaveSessionServlet extends HttpServlet {
         session2Save.setUserId(user.getUserId());
         sessionDAO.save(session2Save);
 
-        response.sendRedirect("./play.jsp");
+        response.sendRedirect("./personal_page");
     }
 }

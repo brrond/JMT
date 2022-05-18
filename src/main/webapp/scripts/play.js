@@ -32,7 +32,7 @@ function start() {
 function end() {
     sw.stop();
     let elapsed = sw.getElapsed() / 1000;
-    divRes.innerHTML = "Test successful. Elapsed time : " + elapsed + "sec. Bebra<br>" + "<a href='save_session?&time=" + elapsed + "'>Done</a>";
+    divRes.innerHTML = "Test successful. Elapsed time : " + elapsed + "sec<br>" + "<a href='save_session?&time=" + elapsed + "'>Done</a>";
     divRes.style.display = "block";
 }
 

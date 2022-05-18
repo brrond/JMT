@@ -39,6 +39,7 @@ public class PersonalPageServlet extends HttpServlet {
                 .append("\"><br><br>");
 
         outputBuilder.append("<a href='./play.jsp'>Play game</a><br>");
+        outputBuilder.append("<a href='stat'>Stat page</a><br>");
         outputBuilder.append("<a href='./logout.jsp'>Logout</a>");
 
         outputBuilder.append(HTMLPage.getBody2());

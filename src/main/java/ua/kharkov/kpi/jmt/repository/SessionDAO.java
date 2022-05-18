@@ -27,11 +27,11 @@ public class SessionDAO {
         return em.find(Session.class, session.getSessionId());
     }
 
-    public Session findSessionById(int sessionId) {
+    public Session findSessionById(Long sessionId) {
         return em.find(Session.class, sessionId);
     }
 
-    public List<Session> findSessionsByUserId(int userId) {
+    public List<Session> findSessionsByUserId(Long userId) {
         return em.createQuery("SELECT ses FROM session ses WHERE ses.userId=:userId", Session.class)
                 .setParameter("userId", userId)
                 .getResultList();
