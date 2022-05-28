@@ -2,7 +2,8 @@
 <resources>
     <Resource id="jdbc/hospitalDataSource" type="javax.sql.DataSource" name="jdbc/hospitalDataSource">
         jdbcDriver = org.postgresql.Driver
-        jdbcUrl = jdbc:postgresql://host.docker.internal:5432/JMT
+        jdbcUrl = jdbc:postgresql://jmt-db:5432/JMT
+        <!-- host.docker.internal -->
         jtaManaged = true <!-- Автоматическое управление транзакциями (через JTA) -->
         userName = postgres
         password = pass

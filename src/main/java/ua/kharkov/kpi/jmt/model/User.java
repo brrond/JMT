@@ -3,7 +3,6 @@ package ua.kharkov.kpi.jmt.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.nio.channels.FileLock;
 import java.sql.Date;
 
 @Setter

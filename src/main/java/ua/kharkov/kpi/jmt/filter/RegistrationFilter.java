@@ -3,6 +3,7 @@ package ua.kharkov.kpi.jmt.filter;
 import ua.kharkov.kpi.jmt.model.User;
 import ua.kharkov.kpi.jmt.repository.UserDAO;
 
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
@@ -44,6 +45,7 @@ public class RegistrationFilter extends HttpFilter {
             if(photoPart.getSize() > 1024 * 1024) msg = "File is too large";
 
             if(!msg.isEmpty()) {
+                req.setAttribute("msg", msg);
                 req.setAttribute("redirect", "personal_page");
                 req.getRequestDispatcher("./massage.jsp").forward(req, res);
                 return;
@@ -56,11 +58,16 @@ public class RegistrationFilter extends HttpFilter {
 
             User user;
             user = new User(email, username, password, registrationDate, null, 0.);
-            if(userDAO == null) {
-                throw new NumberFormatException("Bebra");
-            }
+
             if(!filePath.equals("0.png")) user.setPhotoPath(filePath);
-            userDAO.persist(user); // persist new user in db
+            try {
+                userDAO.persist(user); // persist new user in db
+            } catch(EJBTransactionRolledbackException exception) {
+                req.setAttribute("msg", "Such email or username already exist.");
+                req.setAttribute("redirect", "personal_page");
+                req.getRequestDispatcher("./massage.jsp").forward(req, res);
+                return;
+            }
             if(!filePath.equals("0.png")) photoPart.write(basePath + filePath); // persist img
 
             session.setAttribute("user", user);

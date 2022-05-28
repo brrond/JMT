@@ -13,12 +13,12 @@ import java.io.IOException;
 @WebServlet(name = "UserPhotoServlet", value = "/UserPhotoServlet")
 public class UserPhotoServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doPost(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String basePath = getServletContext().getInitParameter("upload.location");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -26,11 +26,13 @@ public class UserPhotoServlet extends HttpServlet {
         response.setContentType("image/jpeg");
 
         ServletOutputStream outStream = response.getOutputStream();
-        FileInputStream fin = new FileInputStream(basePath + user.getPhotoPath());
+        FileInputStream fin;
+        if(user.getPhotoPath() != null) fin = new FileInputStream(basePath + user.getPhotoPath());
+        else fin = new FileInputStream(basePath + "0.png");
 
         BufferedInputStream bin = new BufferedInputStream(fin);
         BufferedOutputStream bout = new BufferedOutputStream(outStream);
-        int ch =0;
+        int ch;
         while((ch=bin.read())!=-1)
             bout.write(ch);
 
