@@ -54,7 +54,7 @@
     <orderEntry type="library" name="Maven: javax.ws.rs:javax.ws.rs-api:2.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.microprofile.rest.client:microprofile-rest-client-api:3.0" level="project" />
     <orderEntry type="library" name="Maven: javax.json:javax.json-api:1.1.4" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.12" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.24" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.core:jersey-client:2.35" level="project" />
     <orderEntry type="library" name="Maven: jakarta.ws.rs:jakarta.ws.rs-api:2.1.6" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.jersey.core:jersey-common:2.35" level="project" />
