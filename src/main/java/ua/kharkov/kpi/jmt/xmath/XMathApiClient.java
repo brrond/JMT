@@ -70,11 +70,22 @@ public final class XMathApiClient {
         } catch(JsonParsingException exception) {
             Random random = new Random();
             int a, b;
+            if (operation != '+' &&
+                    operation != '-' &&
+                    operation != '*' &&
+                    operation != '/') {
+                int r = random.nextInt(4);
+                operation = '+';
+                if (r == 1) operation = '-';
+                else if (r == 2) operation = '*';
+                else if (r == 3) operation = '/';
+            }
+
             do {
                 a = random.nextInt(maxFirst - minFirst) + minFirst;
                 b = random.nextInt(maxSecond - minSecond) + minSecond;
 
-                if (operation == '/' && a / b != 0) {
+                if (operation == '/' && (b == 0 || (a % b != 0))) {
                     continue;
                 }
 
@@ -86,10 +97,7 @@ public final class XMathApiClient {
                 case '+': ans = a + b; break;
                 case '-': ans = a - b; break;
                 case '*': ans = a * b; break;
-                case '/': ans = a / b; break;
-                default:
-                    operation = '+';
-                    ans = a + b;
+                default: ans = a / b;
             }
 
             return Json.createReader(new StringReader("{\"first\":" + a + ", \"second\":" + b + ", \"operation\":\"" + operation + "\", \"answer\":" + ans + ", \"expression\":\"" + a + operation + b + "\"}")).readObject();
