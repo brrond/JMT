@@ -3,12 +3,14 @@ package ua.kharkov.kpi.jmt.xmath;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+import javax.json.stream.JsonParsingException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import java.io.StringReader;
+import java.util.Random;
 
 public final class XMathApiClient {
     private static final String BASE_API_URL = "https://x-math.herokuapp.com/api/";
@@ -53,7 +55,35 @@ public final class XMathApiClient {
 
         JsonReader jsonReader = Json.createReader(new StringReader(body));
 
-        return jsonReader.readObject();
+        try {
+            return jsonReader.readObject();
+        } catch(JsonParsingException exception) {
+            Random random = new Random();
+            int a, b;
+            do {
+                a = random.nextInt(maxFirst - minFirst) + minFirst;
+                b = random.nextInt(maxSecond - minSecond) + minSecond;
+
+                if (operation == '/' && a / b != 0) {
+                    continue;
+                }
+
+                break;
+            } while (true);
+
+            int ans;
+            switch(operation) {
+                case '+': ans = a + b; break;
+                case '-': ans = a - b; break;
+                case '*': ans = a * b; break;
+                case '/': ans = a / b; break;
+                default:
+                    operation = '+';
+                    ans = a + b;
+            }
+
+            return Json.createReader(new StringReader("{\"first\":" + a + ", \"second\":" + b + ", \"operation\":\" + operation + \", \"answer\":" + ans + ", \"expression\":\"" + a + operation + b + "\"}")).readObject();
+        }
     }
 
 }
