@@ -1,3 +1,7 @@
+# Test it yourself
+<a href='http://46.101.141.32:8080/JMT/'>java-math-test (JMT)</a>
+Link may not be always available
+
 # Introduction
 
 This project as part of assessment work of "Java Enterprise Edition" course. After two month I'm looking on this project, and It's awful. There are so many things that I can do better, but let it be. It's my first web project.<br>
