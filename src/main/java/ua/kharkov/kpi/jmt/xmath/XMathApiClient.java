@@ -30,7 +30,17 @@ public final class XMathApiClient {
         String body = response.readEntity(String.class);
 
         JsonReader jsonReader = Json.createReader(new StringReader(body));
-        return ExpressionFactory.getExpression(jsonReader.readObject());
+        try {
+            return ExpressionFactory.getExpression(jsonReader.readObject());
+        } catch(JsonParsingException exception) {
+            Random random = new Random();
+            int r = random.nextInt(4);
+            char op = '+';
+            if (r == 1) op = '-';
+            else if (r == 2) op = '*';
+            else if (r == 3) op = '/';
+            return ExpressionFactory.getExpression(constructQuery(op, -20, 20, -20, 20));
+        }
     }
 
     public static JsonObject constructQuery(Character operation,
@@ -82,7 +92,7 @@ public final class XMathApiClient {
                     ans = a + b;
             }
 
-            return Json.createReader(new StringReader("{\"first\":" + a + ", \"second\":" + b + ", \"operation\":\" + operation + \", \"answer\":" + ans + ", \"expression\":\"" + a + operation + b + "\"}")).readObject();
+            return Json.createReader(new StringReader("{\"first\":" + a + ", \"second\":" + b + ", \"operation\":\"" + operation + "\", \"answer\":" + ans + ", \"expression\":\"" + a + operation + b + "\"}")).readObject();
         }
     }
 
