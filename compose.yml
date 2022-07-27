@@ -3,6 +3,7 @@ version: "3.9"
 volumes:
   postgres:
   pgadmin:
+  images:
 
 services:
   jmt-db:
@@ -35,6 +36,7 @@ services:
       - "8080:8080"
     volumes:
       - ./target/JMT-1.0-SNAPSHOT.war:/usr/local/tomee/webapps/JMT.war
+      - images:/usr/local/tomee/JMT/images/
     entrypoint:
       - catalina.sh
       - run

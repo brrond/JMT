@@ -5,8 +5,6 @@
          version="4.0">
     <context-param>
         <param-name>upload.location</param-name>
-        <param-value>/usr/local/tomee/webapps/JMT/images/</param-value>
-        <!-- /usr/local/tomee/webapps/JMT-1.0-SNAPSHOT/images/ -->
-        <!-- TODO Change this path if project migrates -->
+        <param-value>/usr/local/tomee/JMT/images/</param-value>
     </context-param>
 </web-app>
